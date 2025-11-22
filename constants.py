@@ -116,7 +116,29 @@ SEARCH_SERVICE_INFO_TOOL_DESCRIPTION = "自社サービス「EcoTee」に関す�
 SEARCH_CUSTOMER_COMMUNICATION_INFO_TOOL_NAME = "search_customer_communication_tool"
 SEARCH_CUSTOMER_COMMUNICATION_INFO_TOOL_DESCRIPTION = "顧客とのやりとりに関する情報を参照したい時に使う"
 SEARCH_WEB_INFO_TOOL_NAME = "search_web_tool"
-SEARCH_WEB_INFO_TOOL_DESCRIPTION = "自社サービス「HealthX」に関する質問で、Web検索が必要と判断した場合に使う"
+SEARCH_WEB_INFO_TOOL_DESCRIPTION = """
+    ユーザーからの問い合わせ内容が、
+    「会社情報」
+    「サービス情報」
+    「顧客とのコミュニケーション情報（過去の問い合わせ履歴など）」
+    のいずれにも該当しない場合に、Web検索を行うためのツール。
+    引数には、検索したいキーワードを入れてください。
+"""
+
+# 感情分析ツール
+ANALYZE_SENTIMENT_TOOL_NAME = "analyze_sentiment"
+ANALYZE_SENTIMENT_TOOL_DESCRIPTION = """
+    テキストの感情（ポジティブ、ネガティブ、中立）を分析するためのツール。
+    顧客のメッセージから感情を読み取り、対応方針を決める場合などに使用してください。
+    引数には、分析したいテキストを入れてください。
+"""
+
+SYSTEM_PROMPT_ANALYZE_SENTIMENT = """
+    以下のテキストの感情を分析し、「ポジティブ」「ネガティブ」「中立」のいずれかで答えてください。
+    回答は判定結果の単語のみとしてください。
+
+    テキスト: {text}
+"""
 
 
 # ==========================================

@@ -565,3 +565,31 @@ def adjust_string(s):
     
     # OSがWindows以外の場合はそのまま返す
     return s
+
+
+def analyze_sentiment(text):
+    """
+    テキストの感情分析を行う
+
+    Args:
+        text: 分析対象のテキスト
+
+    Returns:
+        分析結果（ポジティブ、ネガティブ、中立）
+    """
+    try:
+        prompt = PromptTemplate(
+            input_variables=["text"],
+            template=ct.SYSTEM_PROMPT_ANALYZE_SENTIMENT,
+        )
+        # format_promptで生成されるのはPromptValueなので、to_messages()でメッセージリストにする
+        messages = prompt.format_prompt(text=text).to_messages()
+        
+        # invokeメソッドを使用する
+        response = st.session_state.llm.invoke(messages)
+        return response.content
+    except Exception as e:
+        # エラーが発生した場合はログに出力し、デフォルト値を返すかエラーを通知する
+        logger = logging.getLogger(ct.LOGGER_NAME)
+        logger.error(f"Error in analyze_sentiment: {e}")
+        return "分析失敗"

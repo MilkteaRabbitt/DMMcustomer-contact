@@ -148,6 +148,12 @@ def initialize_agent_executor():
             name = ct.SEARCH_WEB_INFO_TOOL_NAME,
             func=search.run,
             description=ct.SEARCH_WEB_INFO_TOOL_DESCRIPTION
+        ),
+        # 感情分析ツール
+        Tool(
+            name=ct.ANALYZE_SENTIMENT_TOOL_NAME,
+            func=utils.analyze_sentiment,
+            description=ct.ANALYZE_SENTIMENT_TOOL_DESCRIPTION
         )
     ]
 
