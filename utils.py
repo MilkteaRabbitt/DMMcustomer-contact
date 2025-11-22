@@ -355,12 +355,18 @@ def notice_slack(chat_message):
     # 現在日時を取得
     now_datetime = get_datetime()
 
+    # 感情分析を実行
+    sentiment = analyze_sentiment(chat_message)
+    # ネガティブの場合は太字にする
+    if "ネガティブ" in sentiment:
+        sentiment = f"*{sentiment}*"
+
     # Slack通知用のプロンプト生成
     prompt = PromptTemplate(
-        input_variables=["slack_id_text", "query", "context", "now_datetime"],
+        input_variables=["slack_id_text", "query", "context", "now_datetime", "sentiment"],
         template=ct.SYSTEM_PROMPT_NOTICE_SLACK,
     )
-    prompt_message = prompt.format(slack_id_text=slack_id_text, query=chat_message, context=context, now_datetime=now_datetime)
+    prompt_message = prompt.format(slack_id_text=slack_id_text, query=chat_message, context=context, now_datetime=now_datetime, sentiment=sentiment)
 
     # Slack通知の実行
     agent_executor.invoke({"input": prompt_message})
