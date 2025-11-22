@@ -482,10 +482,10 @@ def create_slack_id_text(slack_ids):
     """
     slack_id_text = ""
     for i, id in enumerate(slack_ids):
-        slack_id_text += f"「{id}」"
+        slack_id_text += f"<@{id}>"
         # 最後のSlackID以外、連結後に「と」を追加
         if not i == len(slack_ids)-1:
-            slack_id_text += "と"
+            slack_id_text += " "
     
     return slack_id_text
 
